@@ -32,33 +32,47 @@ int main(){
     
     FILE *fp;
     FILE *fo;
+    FILE *fs0;
+    FILE *flog;
 
     char *fnameo = "public/index.html";
     char *fnamep = "public/preindex.html";
+    char *fnames0 = "signal";
+    char *flogname = "logfile";
     char buff[bufsize];
     
     char *find = "_addData_";
-    
-    char repName0[namesize] = "[ \"Month\", ";
-    char repData0[datasize] = "1,2,3,4,5,6,7,8,9,10,11,12"; 
-    
-    char repName1[namesize] = "[ \"Coffee\", ";
-    char repData1[datasize] = "50,50,50,50,50,50,50,50,50,50,50,50";
-    
-    char repName2[namesize] = "[ \"Cafe\", ";
-    char repData2[datasize] = "20,32,10,49,31,20,33,41,66,11,4,44";
-    
+
     fo = fopen(fnameo, "w");
     fp = fopen(fnamep, "r");
+    fs0 = fopen(fnames0, "r");
+    flog = fopen(flogname, "a");
     
-    if(fo == NULL || fp == NULL){
-        printf("%s または %s ファイルが開けません。\n", fnameo, fnamep);
-        return -1;
+    char buff0[bufsize];
+    if(fgets(buff0, sizeof(buff0), fs0) == NULL){
+        
+        char repName0[namesize] = "[ \"Month\", ";
+        char repData0[datasize] = "1,2,3,4,5,6,7,8,9,10,11,12"; 
+    
+        char repName1[namesize] = "[ \"Coffee\", ";
+        char repData1[datasize] = "50,50,50,50,50,50,50,50,50,50,50,50";
+    
+        char repName2[namesize] = "[ \"Cafe\", ";
+        char repData2[datasize] = "20,32,10,49,31,20,33,41,66,11,4,44";
+
+        if(fo == NULL || fp == NULL){
+            printf("%s または %s ファイルが開けません。\n", fnameo, fnamep);
+            return -1;
+        }
+
+        fclose(fs0);
+    
+        generateSignal(repName0, repData0);
+        generateSignal(repName1, repData1);
+        generateSignal(repName2, repData2);
+        
     }
-    
-    generateSignal(repName0, repData0);
-    generateSignal(repName1, repData1);
-    generateSignal(repName2, repData2);
+
 
     FILE *fs2;
     char *fnames2 = "signal";
@@ -72,6 +86,7 @@ int main(){
         
             while(fgets(buff2, sizeof(buff2), fs2) != NULL){
                 fputs(buff2, fo);
+                fputs(buff2, flog);                                 // Take a log
             }
                         
         }else{
@@ -83,6 +98,7 @@ int main(){
     fclose(fp);
     fclose(fo);
     fclose(fs2);
+    fclose(flog);
     
     printf("%s ファイルへの書き込みが終わりました。\n", fnameo);
 
