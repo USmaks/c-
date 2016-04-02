@@ -59,7 +59,18 @@ int main(){
     
         char repName2[namesize] = "[ \"Cafe\", ";
         char repData2[datasize] = "20,32,10,49,31,20,33,41,66,11,4,44";
-
+        
+        char repName3[namesize] = "[ \"Tea\", ";
+        char repData3[datasize];
+        char repData3temp[datasize];
+        int j=0, y[datasize];
+        
+        for(j=1; j<13; j++){
+            y[j] = j*j;
+            sprintf(repData3temp, "%d,", y[j]);
+            strcat(repData3, repData3temp);
+        }
+        
         if(fo == NULL || fp == NULL){
             printf("%s または %s ファイルが開けません。\n", fnameo, fnamep);
             return -1;
@@ -70,6 +81,7 @@ int main(){
         generateSignal(repName0, repData0);
         generateSignal(repName1, repData1);
         generateSignal(repName2, repData2);
+        generateSignal(repName3, repData3);
         
     }
 
