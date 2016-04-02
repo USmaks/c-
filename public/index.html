@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>C/C++ graphing</title>
+        <script src="http://ccchart.com/js/ccchart.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <canvas id="hoge"></canvas>
+        <script>
+            var chartdata6 = {
+                "config": {
+                    "title": "Chart2",
+                    "subTitle": "Canvasを使った普通な感じのベジェラインチャートです。",
+                    "type": "bezi2",
+                    "xScaleXOffset": 4,
+                    "colorSet": ["#666", "#aaa", "#ccc"],
+                    "bgGradient": {
+                        "direction": "vertical",
+                        "from": "#222",
+                        "to": "#687478"
+                    }
+                },
+                "data": [
+                    ["月", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+                    ],
+                    ["コーヒー",52,57,44,50,60,55,68,80,64,41,57,78
+                    ],
+["Coffee" ,50,50,50,50,50,50,50,50,50,50,50,50                    ],
+                    ["ウーロン",20,23,12,20,42,50,72,63,30,20,32,50
+                    ]
+                ]
+            };
+            ccchart.init('hoge', chartdata6)
+        </script>
+    </body>
+</html>
