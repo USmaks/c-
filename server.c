@@ -18,11 +18,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "config.h"
 #include "html_head.h"
 
 #define bufsize 256
-#define datasize 40
+#define datasize 3010
 #define namesize 30
 #define repsize (datasize + namesize + 1)
 
@@ -51,23 +52,25 @@ int main(){
     char buff0[bufsize];
     if(fgets(buff0, sizeof(buff0), fs0) == NULL){
         
-        char repName0[namesize] = "[ \"Month\", ";
-        char repData0[datasize] = "1,2,3,4,5,6,7,8,9,10,11,12"; 
+        // char repName0[namesize] = "[ \"Month\", ";
+        // char repData0[datasize] = "1,2,3,4,5,6,7,8,9,10,11,12"; 
     
-        char repName1[namesize] = "[ \"Coffee\", ";
-        char repData1[datasize] = "50,50,50,50,50,50,50,50,50,50,50,50";
+        // char repName1[namesize] = "[ \"Coffee\", ";
+        // char repData1[datasize] = "50,50,50,50,50,50,50,50,50,50,50,50";
     
-        char repName2[namesize] = "[ \"Cafe\", ";
-        char repData2[datasize] = "20,32,10,49,31,20,33,41,66,11,4,44";
+        // char repName2[namesize] = "[ \"Cafe\", ";
+        // char repData2[datasize] = "20,32,10,49,31,20,33,41,66,11,4,44";
         
         char repName3[namesize] = "[ \"Tea\", ";
         char repData3[datasize];
         char repData3temp[datasize];
-        int j=0, y[datasize];
+        int x=0, y[datasize];
+        int voltage = 5, frequency=24000;
         
-        for(j=1; j<13; j++){
-            y[j] = j*j;
-            sprintf(repData3temp, "%d,", y[j]);
+        // y = x^2
+        for(x=1; x<datasize; x++){
+            y[x] = voltage*sin(2*3.1415926*frequency*x);
+            sprintf(repData3temp, "%d,", y[x]);
             strcat(repData3, repData3temp);
         }
         
@@ -78,9 +81,9 @@ int main(){
 
         fclose(fs0);
     
-        generateSignal(repName0, repData0);
-        generateSignal(repName1, repData1);
-        generateSignal(repName2, repData2);
+        // generateSignal(repName0, repData0);
+        // generateSignal(repName1, repData1);
+        // generateSignal(repName2, repData2);
         generateSignal(repName3, repData3);
         
     }
